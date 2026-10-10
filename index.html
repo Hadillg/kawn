@@ -7,8 +7,8 @@
 html,body{height:100%;margin:0}body{background:var(--bg);color:var(--fg);font-family:system-ui,sans-serif;display:flex;flex-direction:column}
 h1{text-align:center;letter-spacing:.3em;margin:14px 0 0;font-size:20px}model-viewer{flex:1;width:100%;--poster-color:transparent}
 .bar{padding:12px;text-align:center;font-size:14px}.big{display:block;margin:12px auto;font-size:18px;padding:14px 22px;font-weight:700}button,label{background:#d4a533;color:#000;border:0;border-radius:10px;padding:10px 16px;font-size:15px;margin:4px;display:inline-block}</style></head><body>
-<h1>KAWN</h1><button class="big" id="arb">عرض المجسم بتقنية AR</button><div class="bar" id="msg">اضغط الزر ووافق على استخدام الكاميرا ليظهر المجسم أمامك</div>
-<model-viewer id="mv" src="map.glb" alt="KAWN" camera-controls auto-rotate shadow-intensity="1" ar ar-modes="webxr scene-viewer quick-look">
+<h1>KAWN <small style="font-size:10px;opacity:.5">v2</small></h1><button class="big" id="arb">عرض المجسم بتقنية AR</button><div class="bar" id="msg">اضغط الزر ووافق على استخدام الكاميرا ليظهر المجسم أمامك</div>
+<model-viewer id="mv" src="map2.glb" rotation-per-second="15deg" auto-rotate-delay="0" interaction-prompt="none" alt="KAWN" camera-controls auto-rotate shadow-intensity="1" ar ar-modes="webxr scene-viewer quick-look">
 <button slot="ar-button" style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%)">شاهده في مكانك (AR)</button></model-viewer>
 <div class="bar"><label>جرّب ملف GLB الخاص بك<input type="file" accept=".glb" hidden id="f"></label></div>
 <script>document.getElementById('arb').onclick=()=>{const m=document.getElementById('mv');if(m.canActivateAR){m.activateAR()}else{document.getElementById('msg').textContent='جوالك لا يدعم AR، يمكنك تدوير المجسم بإصبعك أدناه'}};document.getElementById('f').onchange=e=>{const x=e.target.files[0];if(x)document.getElementById('mv').src=URL.createObjectURL(x)}</script>
