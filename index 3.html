@@ -1,0 +1,30 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>KAWN</title>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+<style>
+:root{--bg:#fff;--fg:#111;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111;--fg:#f2f2f2}}
+:root[data-theme="dark"]{--bg:#111;--fg:#f2f2f2}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--fg);font-family:system-ui,sans-serif;display:flex;flex-direction:column}
+h1{text-align:center;letter-spacing:.3em;margin:14px 0 0;font-size:20px}
+.big{display:block;margin:12px auto;font-size:18px;padding:14px 22px;font-weight:700;background:#d4a533;color:#000;border:0;border-radius:12px;transition:transform .2s ease}
+.big:active{transform:scale(.96)}
+.bar{padding:6px 12px;text-align:center;font-size:14px;min-height:20px}
+model-viewer{flex:1;width:100%;opacity:0;transition:opacity 1.2s ease;--poster-color:transparent}
+model-viewer.on{opacity:1}
+</style></head><body>
+<h1>KAWN <small style="font-size:10px;opacity:.5">v7</small></h1>
+<button class="big" id="arb">عرض المجسم بتقنية AR</button>
+<div class="bar" id="msg">جارٍ تحميل المجسم...</div>
+<model-viewer id="mv" src="ps1c.glb" ios-src="ps1c.usdz" alt="KAWN"
+ auto-rotate rotation-per-second="30deg" auto-rotate-delay="0" camera-controls interaction-prompt="none"
+ camera-orbit="30deg 75deg auto" shadow-intensity="1" shadow-softness="1" exposure="1.1" interpolation-decay="120"
+ ar ar-modes="webxr scene-viewer quick-look" ar-placement="floor" ar-scale="auto"></model-viewer>
+<script>
+const mv=document.getElementById('mv'),msg=document.getElementById('msg');
+mv.addEventListener('progress',e=>{const p=e.detail.totalProgress;if(p<1)msg.textContent='جارٍ تحميل المجسم... '+Math.round(p*100)+'%'});
+mv.addEventListener('load',()=>{msg.textContent='اضغط الزر ووافق على الكاميرا ليظهر المجسم أمامك';mv.classList.add('on')});
+mv.addEventListener('error',()=>{msg.textContent='تعذّر تحميل المجسم، أعد فتح الصفحة'});
+document.getElementById('arb').onclick=()=>{if(mv.canActivateAR){mv.activateAR()}else{msg.textContent='جوالك لا يدعم AR، يمكنك تدوير المجسم بإصبعك'}};
+</script></body></html>
